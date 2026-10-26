@@ -1,4 +1,4 @@
-## Cybersecurity Testing Lab Setup (WK1-PM1)
+# Cybersecurity Testing Lab Setup (WK1-PM1)
 
 A step-by-step record of building a cybersecurity testing lab on a Windows laptop using **VirtualBox** and **Kali Linux** as the attacking machine.
 

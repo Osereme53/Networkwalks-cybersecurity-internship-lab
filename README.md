@@ -145,19 +145,6 @@ The test file `kali_shared_test.txt` was created and should also appear in the W
 > ```
 > A `No such file or directory` error was caused by a typo (`/mnt/dowloads`).
 
-## Step 11 (Bonus): Vulnerability Scanner Setup (GVM/OpenVAS)
-
-Greenbone Vulnerability Management was installed and checked with:
-
-```bash
-sudo gvm-check-setup
-```
-
-Result: **"It seems like your GVM-25.04.0 installation is OK."** The `gvmd` and `gsad` services are active, and `nmap`, `ssh-keygen`, `nsis`, and `xsltproc` were found.
-
-Warnings seen (non-blocking):
-- `GLib-CRITICAL ... g_file_get_contents` assertion message, which is cosmetic
-- Password policy is empty. Optionally edit `/etc/gvm/pwpolicy.conf`
 
 ---
 
@@ -171,4 +158,4 @@ Warnings seen (non-blocking):
 - [x] Kali IP is `10.0.0.2/24`
 - [x] Full Internet access (ping test passed)
 
-> **Ethical note:** This lab is for learning and authorized testing only. Only test systems you own or have written permission to test.
+Writer: Osagie Osereme 

@@ -4,8 +4,6 @@ A step-by-step record of building a cybersecurity testing lab on a Windows lapto
 
 ## Task Requirements
 
-![Task WK1-PM1](images/IMG_6538.jpeg)
-
 - Use VirtualBox as the base (latest recommended version)
 - Set up Kali Linux as the attacking/hacker machine
 - Use a NAT Network with subnet `10.0.0.0/24`
@@ -33,8 +31,6 @@ A step-by-step record of building a cybersecurity testing lab on a Windows lapto
 
 Download the latest VirtualBox installer for Windows and run it. This lab used **version 7.2.6 (amd64)**. Click **Next** through the wizard and finish the installation.
 
-![VirtualBox installer](images/IMG_6594.png)
-
 ## Step 2: Create the Kali Linux VM
 
 Create a new VM named **Attacking/hacker machine** in VirtualBox Manager:
@@ -44,11 +40,7 @@ Create a new VM named **Attacking/hacker machine** in VirtualBox Manager:
 - Processors: 2
 - Hard disk: 40 GB VDI, dynamically allocated
 
-![VirtualBox Manager with VM details](images/IMG_6604.jpeg)
-
 Storage configuration (Kali disk attached to SATA Port 0, optical drive empty after installation):
-
-![VM storage settings](images/IMG_6606.jpeg)
 
 ## Step 3: Create the NAT Network (10.0.0.0/24)
 
@@ -59,8 +51,6 @@ In VirtualBox go to **File > Tools > Network Manager > NAT Networks** and create
 - Enable DHCP: checked
 - Enable IPv6: unchecked
 
-![NAT Network configuration](images/IMG_6605.jpeg)
-
 Then open the VM **Settings > Network**, set **Adapter 1** to **NAT Network** and choose `NatNetwork`.
 
 ## Step 4: Enable Clipboard and Drag & Drop
@@ -70,8 +60,6 @@ Open VM **Settings > General > Features** (Expert mode) and set:
 - Shared Clipboard: **Bidirectional**
 - Drag-and-Drop: **Bidirectional**
 
-![Clipboard and drag/drop](images/IMG_6612.jpeg)
-
 ## Step 5: Configure the Shared Folder
 
 Open VM **Settings > Shared Folders** and add a machine folder:
@@ -80,13 +68,9 @@ Open VM **Settings > Shared Folders** and add a machine folder:
 - Access: **Full**
 - Auto Mount: **Yes**
 
-![Shared folder settings](images/IMG_6613.jpeg)
-
 ## Step 6: Set the Static IP on Kali (10.0.0.2/24)
 
 By default, DHCP assigned Kali a different address (`10.0.2.5/24`):
-
-![Default DHCP address](images/IMG_6608.jpeg)
 
 Open **Edit Connections > Wired connection 1 > IPv4 Settings** and set:
 
@@ -99,8 +83,6 @@ Open **Edit Connections > Wired connection 1 > IPv4 Settings** and set:
 | DNS servers | `8.8.8.8` |
 
 Click **Save**.
-
-![IPv4 manual settings](images/IMG_6607.jpeg)
 
 ## Step 7: Apply the Changes
 
@@ -118,8 +100,6 @@ Then restart NetworkManager (mind the spelling):
 ```bash
 sudo systemctl restart NetworkManager
 ```
-
-![Restarting NetworkManager](images/IMG_6609.jpeg)
 
 > **Troubleshooting notes**
 > - `Object "ifconfig" is unknown` happens because `ifconfig` is not an `ip` subcommand. Use `ifconfig eth0 ...` or `ip link set eth0 ...`.
@@ -139,8 +119,6 @@ Expected results:
 - `eth0` shows `10.0.0.2/24`
 - Default route goes via `10.0.0.1`
 
-![Verifying IP and routes](images/IMG_6610.jpeg)
-
 ## Step 9: Verify Internet Access
 
 ```bash
@@ -148,8 +126,6 @@ ping -c 4 google.com
 ```
 
 Result: 4 packets transmitted, 4 received, **0% packet loss**, so Kali has full Internet access.
-
-![Ping test](images/IMG_6611.jpeg)
 
 ## Step 10: Verify the Shared Folder
 
@@ -169,8 +145,6 @@ The test file `kali_shared_test.txt` was created and should also appear in the W
 > ```
 > A `No such file or directory` error was caused by a typo (`/mnt/dowloads`).
 
-![Shared folder test](images/IMG_6614.jpeg)
-
 ## Step 11 (Bonus): Vulnerability Scanner Setup (GVM/OpenVAS)
 
 Greenbone Vulnerability Management was installed and checked with:
@@ -185,8 +159,6 @@ Warnings seen (non-blocking):
 - `GLib-CRITICAL ... g_file_get_contents` assertion message, which is cosmetic
 - Password policy is empty. Optionally edit `/etc/gvm/pwpolicy.conf`
 
-![GVM check setup](images/IMG_6615.jpeg)
-
 ---
 
 ## Requirements Checklist
@@ -198,16 +170,5 @@ Warnings seen (non-blocking):
 - [x] Shared folder with host Downloads
 - [x] Kali IP is `10.0.0.2/24`
 - [x] Full Internet access (ping test passed)
-
-## Repository Structure
-
-```
-.
-├── README.md
-└── images/
-    ├── IMG_6538.jpeg
-    ├── IMG_6594.png
-    └── ... (all screenshots)
-```
 
 > **Ethical note:** This lab is for learning and authorized testing only. Only test systems you own or have written permission to test.
